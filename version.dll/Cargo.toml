@@ -1,0 +1,28 @@
+[package]
+name = "VERSION"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+windows-sys = { version = "0.59", features = [
+  "Win32_Storage_FileSystem",
+]}
+
+# dll-proxy-macro = { git = "https://github.com/avalsch/dll-proxy-macro" }
+dll-proxy-macro = { path = "../" }
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+# these settings dont make any difference in
+# this project, but if you have more code they
+# can help keep the binary size smaller
+opt-level = "z"
+strip = "symbols"
+lto = "fat"
+codegen-units = 1
